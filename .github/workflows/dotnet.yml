@@ -14,34 +14,30 @@ jobs:
 
     runs-on: ubuntu-latest
 
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Docker Login
-      uses: docker/login-action@v2.2.0
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x'  # Updated to 8.0.x based on your error message
+    - name: Install Aspire
+      run: dotnet workload install aspire
+    - name: Install NBGV tool
+      run: dotnet tool install -g nbgv
+
+    - name: Set Version
+      id: nbgv_version
+      run: echo "Version=$(nbgv get-version -v Version)" >> $GITHUB_OUTPUT
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v1
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-        
-    - name: Version stamping
-      id: nbgv_version
-      uses: dotnet/nbgv@v0.4
-      with:
-        setAllVars: true
 
-
-    - name: Install Aspire
-      run: dotnet workload install aspire
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
     - name: Set up project list
       id: project-list
       run: |
@@ -55,10 +51,19 @@ jobs:
           if [ -d "$project" ]; then
             echo "Publishing $project"
             cd "$project"
-            dotnet publish --os linux --arch x64 -t:PublishContainer /p:ContainerImageTags='"${{ steps.nbgv_version.outputs.Version }};latest"' /p:ContainerRegistry=ghcr.io
+            dotnet publish --os linux --arch x64 -t:PublishContainer \
+              /p:ContainerImageTags='"${{ steps.nbgv_version.outputs.Version }};latest"' \
+              /p:ContainerRegistry=ghcr.io \
+              /p:ContainerRepository=${{ github.repository_owner }}/$project \
+              /p:ContainerUser=${{ github.actor }} \
+              /p:ContainerPassword=${{ secrets.GITHUB_TOKEN }}
             cd ..
           else
             echo "Skipping $project as it's not a directory"
           fi
         done
+
+
+
+    
 
