@@ -32,7 +32,15 @@ jobs:
       uses: dotnet/nbgv@v0.4
       with:
         setAllVars: true
-      
+    - name: Set up project list
+      id: project-list
+      run: |
+        projects=$(ls -d */ | grep -v "JackOfAllTrades.AppHost")
+        echo "PROJECTS=$projects" >> $GITHUB_OUTPUT
+
+    - name: Publish projects
+      run: |
+
     - name: Install Aspire
       run: dotnet workload install aspire
     - name: Restore dependencies
@@ -41,5 +49,12 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Publish
-      run: dotnet publish --os linux --arch x64 -t:PublishContainer /p:ContainerImageTags='"${{ steps.nbgv_version.outputs.Version }};latest"' /p:ContainerRegistry=ghcr.io
+    - name: Publish projects
+      run: |
+        for project in ${{ steps.project-list.outputs.PROJECTS }}
+        do
+          cd $project
+          dotnet publish --os linux --arch x64 -t:PublishContainer /p:ContainerImageTags='"${{ steps.nbgv_version.outputs.Version }};latest"' /p:ContainerRegistry=ghcr.io
+          cd ..
+        done
+      
