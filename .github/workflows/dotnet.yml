@@ -32,14 +32,7 @@ jobs:
       uses: dotnet/nbgv@v0.4
       with:
         setAllVars: true
-    - name: Set up project list
-      id: project-list
-      run: |
-        projects=$(ls -d */ | grep -v "JackOfAllTrades.AppHost")
-        echo "PROJECTS=$projects" >> $GITHUB_OUTPUT
 
-    - name: Publish projects
-      run: |
 
     - name: Install Aspire
       run: dotnet workload install aspire
@@ -49,12 +42,23 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Set up project list
+      id: project-list
+      run: |
+        projects=$(find . -maxdepth 1 -type d -not -path '*/\.*' -not -path '.' | sed 's|^\./||' | grep -v "JackOfAllTrades.AppHost" | tr '\n' ' ')
+        echo "PROJECTS=$projects" >> $GITHUB_OUTPUT
+
     - name: Publish projects
       run: |
         for project in ${{ steps.project-list.outputs.PROJECTS }}
         do
-          cd $project
-          dotnet publish --os linux --arch x64 -t:PublishContainer /p:ContainerImageTags='"${{ steps.nbgv_version.outputs.Version }};latest"' /p:ContainerRegistry=ghcr.io
-          cd ..
+          if [ -d "$project" ]; then
+            echo "Publishing $project"
+            cd "$project"
+            dotnet publish --os linux --arch x64 -t:PublishContainer /p:ContainerImageTags='"${{ steps.nbgv_version.outputs.Version }};latest"' /p:ContainerRegistry=ghcr.io
+            cd ..
+          else
+            echo "Skipping $project as it's not a directory"
+          fi
         done
-      
+
