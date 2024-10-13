@@ -55,8 +55,6 @@ jobs:
               /p:ContainerImageTags='"${{ steps.nbgv_version.outputs.Version }};latest"' \
               /p:ContainerRegistry=ghcr.io \
               /p:ContainerRepository=${{ github.repository_owner }}/$project \
-              /p:ContainerUser=${{ github.actor }} \
-              /p:ContainerPassword=${{ secrets.GITHUB_TOKEN }}
             cd ..
           else
             echo "Skipping $project as it's not a directory"
