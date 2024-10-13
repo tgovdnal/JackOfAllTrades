@@ -1,0 +1,11 @@
+{
+  "TemplatePath": null,
+  "ContainerSettings": {
+    "Registry": "ghcr.io/tgovdnal/",
+    "RepositoryPrefix": "jackofalltrades-",
+    "Tags": [
+      "latest"
+    ],
+    "Builder": "docker"
+  }
+}
