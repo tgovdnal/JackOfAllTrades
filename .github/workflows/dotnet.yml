@@ -54,7 +54,7 @@ jobs:
             dotnet publish --os linux --arch x64 -t:PublishContainer \
               /p:ContainerImageTags='"${{ steps.nbgv_version.outputs.Version }};latest"' \
               /p:ContainerRegistry=ghcr.io \
-              /p:ContainerRepository=${{ github.repository_owner }}/$project \
+              /p:ContainerRepository=${{ github.repository_owner }}/$project
             cd ..
           else
             echo "Skipping $project as it's not a directory"
