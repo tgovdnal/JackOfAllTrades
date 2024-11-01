@@ -6,17 +6,13 @@
   ],
   "containerBuilder": "docker",
   "outputFormat": "compose",
+  "disableSecrets": true,
   "privateRegistryEmail": "aspir8@aka.ms",
+  "includeDashboard": true,
   "secrets": {
-    "salt": "UDTE0CLorHjeiVWm",
-    "hash": "sD3SOM5uJokmPTvkXX0/j8Vq8nn3yLdzeZija3YsbaY=",
-    "secrets": {
-      "cache": {},
-      "apiservice": {},
-      "webfrontend": {
-        "ConnectionStrings__cache": "UDTE0CLorHjeiVWmJ3LUtL/GzKFxvKEObvXLmTYQn/SlbmoNXak="
-      }
-    }
+    "salt": "4/QcPmQwAuoaPpVA",
+    "hash": "Ixtn7d2e9UZGBL7DTFkkmhg9yoDu3VJt0hynpgIhLkY=",
+    "secrets": {}
   },
   "processAllComponents": true
 }
