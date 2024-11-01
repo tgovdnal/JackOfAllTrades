@@ -12,12 +12,14 @@
   <ItemGroup>
     <ProjectReference Include="..\JackOfAllTrades.ApiService\JackOfAllTrades.ApiService.csproj" />
     <ProjectReference Include="..\JackOfAllTrades.Web\JackOfAllTrades.Web.csproj" />
+    <ProjectReference Include="..\JackOfAllTrades.Common\JackOfAllTrades.Common.csproj"  IsAspireProjectResource="false"  />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.2" />
     <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.2.2" />
     <PackageReference Include="Aspire.Hosting.Redis" Version="8.2.2" />
+
   </ItemGroup>
 
 </Project>
