@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace JackOfAllTTrades.Data.Postgres
 {
-    internal class PgPostRepository(PgContext pgContext) : IPostRepository
+    public class PgPostRepository(PgContext pgContext) : IPostRepository
     {
         public async Task<Post> AddPost(Post post)
         {
