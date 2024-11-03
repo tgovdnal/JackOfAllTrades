@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using OpenTelemetry.Trace;
 using System.Diagnostics;
-using System.Threading;
 
 namespace JackOfAllTrade.Data.Migration
 {
@@ -28,6 +27,7 @@ namespace JackOfAllTrade.Data.Migration
 
                 await EnsureDatabaseExistsAsync(dbContext, stoppingToken);
                 await MigrateDbAsync(dbContext, stoppingToken);
+                await EnsureAdminUser(scope.ServiceProvider, dbContext, stoppingToken);
 
             }
             catch (Exception ex)
@@ -35,7 +35,6 @@ namespace JackOfAllTrade.Data.Migration
                 activity?.RecordException(ex);
                 throw;
             }
-
             hostApplicationLifetime.StopApplication();
         }
 
@@ -53,28 +52,26 @@ namespace JackOfAllTrade.Data.Migration
             await trans.CommitAsync(cancellationToken);
         }
         
-        private static async Task EnsureAdminUser(PgContext pgContext, CancellationToken cancellationToken)
+        private static async Task EnsureAdminUser(IServiceProvider serviceProvider,PgContext pgContext, CancellationToken cancellationToken)
         {
-            //var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var adminUser = await userManager.FindByNameAsync("Admin");
 
-            //var adminUser = await userManager.FindByEmailAsync("admin@example.com");
+            if (adminUser == null)
+            {
+                var user = new IdentityUser
+                {
+                    UserName = "Admin",
+                    EmailConfirmed = true
+                };
 
-            //if (adminUser == null)
-            //{
-            //    var user = new IdentityUser
-            //    {
-            //        UserName = "admin@example.com",
-            //        Email = "admin@example.com",
-            //        EmailConfirmed = true
-            //    };
+                var result = await userManager.CreateAsync(user, "IhrSicheresPasswort123!");
 
-            //    var result = await userManager.CreateAsync(user, "IhrSicheresPasswort123!");
-
-            //    if (result.Succeeded)
-            //    {
-            //        await userManager.AddToRoleAsync(user, "Administrator");
-            //    }
-            //}
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Administrator");
+                }
+            }
         } 
     }
 }

@@ -1,21 +1,20 @@
+using JackOfAllTrade.Data.Migration;
 using JackOfAllTTrades.Data.Postgres;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace JackOfAllTrade.Data.Migration
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = Host.CreateApplicationBuilder(args);
-            var pg = new RegisterPostgresService();
-            pg.RegisterServices(builder);
-            builder.Services.AddHostedService<Worker>();
+var builder = Host.CreateApplicationBuilder(args);
 
-            builder.Services.AddOpenTelemetry()
-    .WithTracing(tracing => tracing.AddSource(Worker.ActivitySourceName));
 
-            var host = builder.Build();
-            host.Run();
-        }
-    }
-}
+var pg = new RegisterPostgresService();
+pg.RegisterServices(builder);
+
+builder.Services.AddIdentityCore<IdentityUser>()
+    .AddEntityFrameworkStores<PgContext>();
+builder.Services.AddHostedService<Worker>();
+
+builder.Services.AddOpenTelemetry()
+.WithTracing(tracing => tracing.AddSource(Worker.ActivitySourceName));
+
+var host = builder.Build();
+host.Run();
