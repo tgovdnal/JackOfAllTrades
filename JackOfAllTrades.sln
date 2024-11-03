@@ -6,17 +6,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackOfAllTrades.AppHost", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JackOfAllTrades.ServiceDefaults", "JackOfAllTrades.ServiceDefaults\JackOfAllTrades.ServiceDefaults.csproj", "{3F867062-2A5D-4887-853A-F04524C012CB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JackOfAllTrades.ApiService", "JackOfAllTrades.ApiService\JackOfAllTrades.ApiService.csproj", "{74A7F238-C172-4E2A-A896-B80599F3D4D1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JackOfAllTrades.Web", "JackOfAllTrades.Web\JackOfAllTrades.Web.csproj", "{110FD292-7510-46B8-BD03-A3197AB52A93}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackOfAllTrades.Abstractions", "JackOfAllTrades.Abstractions\JackOfAllTrades.Abstractions.csproj", "{19656C60-E563-4E05-B6EF-D5C902B3327B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackOfAllTrades.Data.Postgres", "JackOfAllTTrades.Data.Postgres\JackOfAllTrades.Data.Postgres.csproj", "{AF6946C1-2EBC-4FC0-B33A-3639C05E82D0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackOfAllTrades.Data.Migration", "JackOfAllTrade.Data.Migration\JackOfAllTrades.Data.Migration.csproj", "{888E9E95-5D7E-4073-BA58-D7F776F5EC15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackOfAllTrades.Common", "JackOfAllTrades.Common\JackOfAllTrades.Common.csproj", "{4972BB5B-0690-4B0D-A1DE-3AA12C69203E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackOfAllTrades.Data.Postgres", "JackOfAllTrades.Data.Postgres\JackOfAllTrades.Data.Postgres.csproj", "{CCFC50EF-A3E5-4B38-98B6-72DB94AD747B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3970B033-CA99-410A-8B27-4FD86C1B1290}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,10 +35,6 @@ Global
 		{3F867062-2A5D-4887-853A-F04524C012CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F867062-2A5D-4887-853A-F04524C012CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F867062-2A5D-4887-853A-F04524C012CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74A7F238-C172-4E2A-A896-B80599F3D4D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74A7F238-C172-4E2A-A896-B80599F3D4D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74A7F238-C172-4E2A-A896-B80599F3D4D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74A7F238-C172-4E2A-A896-B80599F3D4D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{110FD292-7510-46B8-BD03-A3197AB52A93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{110FD292-7510-46B8-BD03-A3197AB52A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{110FD292-7510-46B8-BD03-A3197AB52A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,10 +43,6 @@ Global
 		{19656C60-E563-4E05-B6EF-D5C902B3327B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19656C60-E563-4E05-B6EF-D5C902B3327B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19656C60-E563-4E05-B6EF-D5C902B3327B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF6946C1-2EBC-4FC0-B33A-3639C05E82D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF6946C1-2EBC-4FC0-B33A-3639C05E82D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF6946C1-2EBC-4FC0-B33A-3639C05E82D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF6946C1-2EBC-4FC0-B33A-3639C05E82D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{888E9E95-5D7E-4073-BA58-D7F776F5EC15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{888E9E95-5D7E-4073-BA58-D7F776F5EC15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{888E9E95-5D7E-4073-BA58-D7F776F5EC15}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +51,10 @@ Global
 		{4972BB5B-0690-4B0D-A1DE-3AA12C69203E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4972BB5B-0690-4B0D-A1DE-3AA12C69203E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4972BB5B-0690-4B0D-A1DE-3AA12C69203E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCFC50EF-A3E5-4B38-98B6-72DB94AD747B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCFC50EF-A3E5-4B38-98B6-72DB94AD747B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCFC50EF-A3E5-4B38-98B6-72DB94AD747B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCFC50EF-A3E5-4B38-98B6-72DB94AD747B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

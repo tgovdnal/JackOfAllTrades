@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0-rc.1.24511.1" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
@@ -10,16 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JackOfAllTrades.ApiService\JackOfAllTrades.ApiService.csproj" />
+    <ProjectReference Include="..\JackOfAllTrade.Data.Migration\JackOfAllTrades.Data.Migration.csproj" />
     <ProjectReference Include="..\JackOfAllTrades.Web\JackOfAllTrades.Web.csproj" />
-    <ProjectReference Include="..\JackOfAllTrades.Common\JackOfAllTrades.Common.csproj"  IsAspireProjectResource="false"  />
+    <ProjectReference Include="..\JackOfAllTrades.Common\JackOfAllTrades.Common.csproj" IsAspireProjectResource="false" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.2" />
-    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.2.2" />
-    <PackageReference Include="Aspire.Hosting.Redis" Version="8.2.2" />
-
+    <PackageReference Include="Aspire.Hosting.AppHost"/>
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+    <PackageReference Include="Aspire.Hosting.Redis" />
   </ItemGroup>
 
 </Project>
